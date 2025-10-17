@@ -3600,7 +3600,8 @@ do
       local function tenchUpdate()
         Private.StartProfileSystem("generictrigger temporary enchant");
         local _, mh_rem, oh_rem, rw_rem
-        _, mh_rem, mh_charges, _, oh_rem, oh_charges, _, rw_rem, rw_charges = GetWeaponEnchantInfo();
+        _, mh_rem, mh_charges, _, oh_rem, oh_charges = GetWeaponEnchantInfo();
+        _, rw_rem, rw_charges = GetRangedWeaponEnchantInfo();
         local time = GetTime();
         local mh_exp_new = mh_rem and (time + (mh_rem / 1000));
         local oh_exp_new = oh_rem and (time + (oh_rem / 1000));
