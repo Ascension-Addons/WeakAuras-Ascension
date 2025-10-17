@@ -214,7 +214,7 @@ function OptionsPrivate.GetActionOptions(data)
         name = "",
         order = 3.19,
         image = function() return "", 0, 0 end,
-        hidden = function() return WeakAuras.IsAwesomeEnabled() ~= 2 or data.actions.start.message_type ~= "TTS" end,
+        hidden = function() return not WeakAuras.IsTTSEnabled() or data.actions.start.message_type ~= "TTS" end,
       },
       start_message_tts_settings = {
         type = "execute",
@@ -228,8 +228,8 @@ function OptionsPrivate.GetActionOptions(data)
                 or L["Install AwesomeCVar to open the Voice Chat settings."],
         name = L["Voice Settings"],
         order = 3.2,
-        disabled = function() return WeakAuras.IsAwesomeEnabled() ~= 2 or not data.actions.start.do_message end,
-        hidden = function() return WeakAuras.IsAwesomeEnabled() ~= 2 or data.actions.start.message_type ~= "TTS" end,
+        disabled = function() return not WeakAuras.IsTTSEnabled() or not data.actions.start.do_message end,
+        hidden = function() return not WeakAuras.IsTTSEnabled() or data.actions.start.message_type ~= "TTS" end,
       },
       start_message = {
         type = "input",
@@ -742,7 +742,7 @@ function OptionsPrivate.GetActionOptions(data)
         name = "",
         order = 23.19,
         image = function() return "", 0, 0 end,
-        hidden = function() return WeakAuras.IsAwesomeEnabled() ~= 2 or data.actions.finish.message_type ~= "TTS" end,
+        hidden = function() return not WeakAuras.IsTTSEnabled() or data.actions.finish.message_type ~= "TTS" end,
       },
       finish_message_tts_settings = {
         type = "execute",
@@ -756,8 +756,8 @@ function OptionsPrivate.GetActionOptions(data)
                 or L["Install AwesomeCVar to open the Voice Chat settings."],
         name = L["Voice Settings"],
         order = 23.2,
-        disabled = function() return WeakAuras.IsAwesomeEnabled() ~= 2 or not data.actions.finish.do_message end,
-        hidden = function() return WeakAuras.IsAwesomeEnabled() ~= 2 or data.actions.finish.message_type ~= "TTS" end,
+        disabled = function() return not WeakAuras.IsTTSEnabled() or not data.actions.finish.do_message end,
+        hidden = function() return not WeakAuras.IsTTSEnabled() or data.actions.finish.message_type ~= "TTS" end,
       },
       finish_message = {
         type = "input",

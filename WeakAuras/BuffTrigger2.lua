@@ -1992,10 +1992,8 @@ Buff2Frame:RegisterEvent("PLAYER_TARGET_CHANGED")
 Buff2Frame:RegisterEvent("PARTY_MEMBERS_CHANGED")
 Buff2Frame:RegisterEvent("RAID_ROSTER_UPDATE")
 Buff2Frame:RegisterEvent("INSTANCE_ENCOUNTER_ENGAGE_UNIT")
-if WeakAuras.IsAwesomeEnabled() then
-  Buff2Frame:RegisterEvent("NAME_PLATE_UNIT_ADDED")
-  Buff2Frame:RegisterEvent("NAME_PLATE_UNIT_REMOVED")
-end
+Buff2Frame:RegisterEvent("NAME_PLATE_UNIT_ADDED")
+Buff2Frame:RegisterEvent("NAME_PLATE_UNIT_REMOVED")
 Buff2Frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 Buff2Frame:SetScript("OnEvent", EventHandler)
 
@@ -3642,10 +3640,8 @@ function BuffTrigger.InitMultiAura()
     multiAuraFrame:RegisterEvent("UNIT_AURA")
     multiAuraFrame:RegisterEvent("PLAYER_TARGET_CHANGED")
 	  multiAuraFrame:RegisterEvent("PLAYER_FOCUS_CHANGED")
-    if WeakAuras.IsAwesomeEnabled() then
-      multiAuraFrame:RegisterEvent("NAME_PLATE_UNIT_ADDED")
-      multiAuraFrame:RegisterEvent("NAME_PLATE_UNIT_REMOVED")
-    end
+    multiAuraFrame:RegisterEvent("NAME_PLATE_UNIT_ADDED")
+    multiAuraFrame:RegisterEvent("NAME_PLATE_UNIT_REMOVED")
     multiAuraFrame:RegisterEvent("PLAYER_LEAVING_WORLD")
     multiAuraFrame:SetScript("OnEvent", BuffTrigger.HandleMultiEvent)
     Private.frames["Multi-target 2 Aura Trigger Handler"] = multiAuraFrame

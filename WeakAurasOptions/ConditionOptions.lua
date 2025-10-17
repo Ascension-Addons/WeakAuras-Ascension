@@ -1016,7 +1016,7 @@ local function addControlsForChange(args, order, data, conditionVariable, totalA
     }
     order = order + 1;
 
-    if WeakAuras.IsAwesomeEnabled() == 2 then
+    if WeakAuras.IsTTSEnabled() then
       args["condition" .. i .. "value" .. j .. "message voice"] = {
         type = "execute",
         name = L["Voice Settings"],

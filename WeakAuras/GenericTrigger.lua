@@ -1274,13 +1274,11 @@ local frame = CreateFrame("Frame");
 frame.unitFrames = {};
 Private.frames["WeakAuras Generic Trigger Frame"] = frame;
 frame:RegisterEvent("PLAYER_ENTERING_WORLD");
-if WeakAuras.IsAwesomeEnabled() then
-  frame:RegisterEvent("NAME_PLATE_UNIT_ADDED")
-  frame:RegisterEvent("NAME_PLATE_UNIT_REMOVED")
-  genericTriggerRegisteredEvents["NAME_PLATE_UNIT_ADDED"] = true;
-  genericTriggerRegisteredEvents["NAME_PLATE_UNIT_REMOVED"] = true;
-end
+frame:RegisterEvent("NAME_PLATE_UNIT_ADDED")
+frame:RegisterEvent("NAME_PLATE_UNIT_REMOVED")
 genericTriggerRegisteredEvents["PLAYER_ENTERING_WORLD"] = true;
+genericTriggerRegisteredEvents["NAME_PLATE_UNIT_ADDED"] = true;
+genericTriggerRegisteredEvents["NAME_PLATE_UNIT_REMOVED"] = true;
 frame:SetScript("OnEvent", HandleEvent);
 
 function GenericTrigger.Delete(id)
@@ -3157,10 +3155,8 @@ function WeakAuras.WatchUnitChange(unit)
     watchUnitChange:RegisterEvent("INSTANCE_ENCOUNTER_ENGAGE_UNIT");
     watchUnitChange:RegisterEvent("PARTY_MEMBERS_CHANGED")
     watchUnitChange:RegisterEvent("RAID_ROSTER_UPDATE")
-    if WeakAuras.IsAwesomeEnabled() then
-      watchUnitChange:RegisterEvent("NAME_PLATE_UNIT_ADDED")
-      watchUnitChange:RegisterEvent("NAME_PLATE_UNIT_REMOVED")
-    end
+    watchUnitChange:RegisterEvent("NAME_PLATE_UNIT_ADDED")
+    watchUnitChange:RegisterEvent("NAME_PLATE_UNIT_REMOVED")
     watchUnitChange:RegisterEvent("UNIT_FACTION")
     watchUnitChange:RegisterEvent("PLAYER_ENTERING_WORLD")
     watchUnitChange:RegisterEvent("UNIT_PET")

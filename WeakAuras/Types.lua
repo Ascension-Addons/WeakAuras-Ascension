@@ -28,11 +28,9 @@ Private.glow_action_types = {
 Private.glow_frame_types = {
   UNITFRAME = L["Unit Frame"],
   FRAMESELECTOR = L["Frame Selector"],
-  PARENTFRAME = L["Parent Frame"]
+  PARENTFRAME = L["Parent Frame"],
+  NAMEPLATE = L["Nameplate"],
 }
-if WeakAuras.IsAwesomeEnabled() then
-  Private.glow_frame_types.NAMEPLATE = L["Nameplate"]
-end
 
 Private.circular_group_constant_factor_types = {
   ANGLE = L["Angle and Radius"],
@@ -1136,11 +1134,9 @@ Private.unit_types_bufftrigger_2 = WeakAuras.Mixin({
   arena = L["Arena"],
   pet = L["Pet"],
   member = L["Specific Unit"],
-  multi = L["Multi-target"]
+  multi = L["Multi-target"],
+  nameplate = L["Nameplate"]
 }, target_unit_types)
-if WeakAuras.IsAwesomeEnabled() then
-  Private.unit_types_bufftrigger_2.nameplate = L["Nameplate"]
-end
 
 Private.actual_unit_types = WeakAuras.Mixin({
   player = L["Player"],
@@ -1162,21 +1158,17 @@ Private.actual_unit_types_cast = WeakAuras.Mixin({
   arena = L["Arena"],
   pet = L["Pet"],
   member = L["Specific Unit"],
+  nameplate = L["Nameplate"],
 }, target_unit_types)
-if WeakAuras.IsAwesomeEnabled() then
-  Private.actual_unit_types_cast.nameplate = L["Nameplate"]
-end
 
 Private.actual_unit_types_cast_tooltip = L["• |cff00ff00Player|r, |cff00ff00Target|r, |cff00ff00Focus|r, and |cff00ff00Pet|r correspond directly to those individual unitIDs.\n• |cff00ff00Specific Unit|r lets you provide a specific valid unitID to watch.\n|cffff0000Note|r: The game will not fire events for all valid unitIDs, making some untrackable by this trigger.\n• |cffffff00Party|r, |cffffff00Raid|r, |cffffff00Boss|r, |cffffff00Arena|r, and |cffffff00Nameplate|r can match multiple corresponding unitIDs.\n• |cffffff00Smart Group|r adjusts to your current group type, matching just the \"player\" when solo, \"party\" units (including \"player\") in a party or \"raid\" units in a raid.\n\n|cffffff00*|r Yellow Unit settings will create clones for each matching unit while this trigger is providing Dynamic Info to the Aura."]
 
 Private.threat_unit_types = WeakAuras.Mixin({
   boss = L["Boss"],
   member = L["Specific Unit"],
-  none = L["At Least One Enemy"]
+  none = L["At Least One Enemy"],
+  nameplate = L["Nameplate"]
 }, target_unit_types)
-if WeakAuras.IsAwesomeEnabled() then
-  Private.threat_unit_types.nameplate = L["Nameplate"]
-end
 
 Private.unit_types_range_check = WeakAuras.Mixin({
   pet = L["Pet"],
@@ -1315,11 +1307,9 @@ Private.anchor_frame_types = {
   MOUSE = L["Mouse Cursor"],
   SELECTFRAME = L["Select Frame"],
   UNITFRAME = L["Unit Frames"],
-  CUSTOM = L["Custom"]
+  NAMEPLATE = L["Nameplates"],
+  CUSTOM = L["Custom"],
 }
-if WeakAuras.IsAwesomeEnabled() then
-  Private.anchor_frame_types.NAMEPLATE = L["Nameplates"]
-end
 
 Private.anchor_frame_types_group = {
   SCREEN = L["Screen/Parent Group"],
@@ -2597,11 +2587,9 @@ Private.classification_types = {
   elite = L["Elite"],
   rare = L["Rare"],
   normal = L["Normal"],
-  trivial = L["Trivial (Low Level)"]
+  trivial = L["Trivial (Low Level)"],
+  minus = L["Minus (Small Nameplate)"]
 }
-if WeakAuras.IsAwesomeEnabled() then
-  Private.classification_types.minus = L["Minus (Small Nameplate)"]
-end
 
 Private.creature_type_types = {
   [1] = L["Beast"],
@@ -2817,7 +2805,7 @@ Private.send_chat_message_types = {
   PRINT = L["Chat Frame"],
   ERROR = L["Error Frame"]
 }
-if WeakAuras.IsAwesomeEnabled() == 2 then
+if WeakAuras.IsTTSEnabled() then
   Private.send_chat_message_types.TTS = L["Text-to-speech"]
 end
 
@@ -3520,21 +3508,17 @@ Private.multiUnitId = {
   ["partypets"] = true,
   ["partypetsonly"] = true,
   ["raid"] = true,
+  ["nameplate"] = true,
 }
-if WeakAuras.IsAwesomeEnabled() then
-  Private.multiUnitId["nameplate"] = true
-end
 
 Private.multiUnitUnits = {
   ["boss"] = {},
   ["arena"] = {},
   ["group"] = {},
   ["party"] = {},
-  ["raid"] = {}
+  ["raid"] = {},
+  ["nameplate"] = {},
 }
-if WeakAuras.IsAwesomeEnabled() then
-  Private.multiUnitUnits["nameplate"] = {}
-end
 
 Private.multiUnitUnits.group["player"] = true
 Private.multiUnitUnits.party["player"] = true
@@ -3568,11 +3552,10 @@ for i = 1, 40 do
   Private.multiUnitUnits.group["raidpet"..i] = true
   Private.multiUnitUnits.raid["raidpet"..i] = true
 end
-if WeakAuras.IsAwesomeEnabled() then
-  for i = 1, 100 do
-    Private.baseUnitId["nameplate"..i] = true
-    Private.multiUnitUnits.nameplate["nameplate"..i] = true
-  end
+
+for i = 1, 100 do
+  Private.baseUnitId["nameplate"..i] = true
+  Private.multiUnitUnits.nameplate["nameplate"..i] = true
 end
 
 Private.dbm_types = {

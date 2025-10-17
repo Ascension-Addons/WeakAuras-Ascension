@@ -30,11 +30,6 @@ To open the options window, type `/wa` or `/weakauras` into your chat and hit en
 1. [Download the package](https://github.com/NoM0Re/WeakAuras-WotLK/archive/refs/heads/master.zip).
 2. Open the archive, then open folder `WeakAuras-WotLK-master`, extract all folders to `Interface\AddOns`.
 
-## Client Extensions
-
-* [Large Address Aware](https://github.com/NoM0Re/WeakAuras-WotLK/wiki/Large-Address-Aware): Enables the WoW client to use up to 4GB of RAM instead of the default 2GB, improving stability and performance on modern systems. This patch is highly recommended for WotLK 3.3.5a users.
-* [Awesome WotLK](https://github.com/NoM0Re/WeakAuras-WotLK/wiki/awesome_wotlk): Adds modern retail-style nameplate search functions, unit tracking, and events. Additionally adds the modern Text-to-Speech functions to the client. This adds a lot of additional functionality to WeakAuras, that are not enabled without it.
-
 ## Extensions
 
 * [WeakAuras Companion](https://weakauras.wtf): This application adds the missing link between Wago.io and the World of Warcraft addon, enabling you to update your auras in a convenient fashion. Read about how to use it [here](https://github.com/NoM0Re/WeakAuras-WotLK/wiki/WeakAuras-Companion).

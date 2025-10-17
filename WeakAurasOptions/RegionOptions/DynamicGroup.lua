@@ -173,11 +173,9 @@ local function createOptions(id, data)
       values = function()
         local v = {
           ["UNITFRAME"] = L["Unit Frames"],
-          ["CUSTOM"] = L["Custom Frames"]
+          ["CUSTOM"] = L["Custom Frames"],
+          ["NAMEPLATE"] = L["Nameplates"]
         }
-        if WeakAuras.IsAwesomeEnabled() then
-          v["NAMEPLATE"] = L["Nameplates"]
-        end
         return v
       end,
       hidden = function() return data.grow == "CUSTOM" end,

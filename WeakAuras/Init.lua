@@ -12,9 +12,7 @@ local versionStringFromToc = GetAddOnMetadata("WeakAuras", "Version")
 local versionString = "5.20.5 Beta"
 -- Year, Month, Day, Hour, Minute, Seconds
 local buildTime = "2025".."09".."14".."20".."43".."00"
-local isAwesomeEnabled = C_VoiceChat and C_VoiceChat.SpeakText and 2 -- TTS available
-                        or C_NamePlate and C_NamePlate.GetNamePlateForUnit and 1 -- Nameplates available
-                        or false
+local isTTSEnabled = C_VoiceChat and C_VoiceChat.SpeakText and true or false
 local isDBMRegistered = (DBM and type(DBM.Revision) == "number" and DBM.Revision >= 20250929200404) and true or false
 
 local flavor
@@ -31,8 +29,8 @@ WeakAuras.buildTime = buildTime
 WeakAuras.newFeatureString = "|TInterface\\OptionsFrame\\UI-OptionsFrame-NewFeatureIcon:0|t"
 WeakAuras.BuildInfo = select(4, GetBuildInfo())
 
-function WeakAuras.IsAwesomeEnabled()
-  return isAwesomeEnabled
+function WeakAuras.IsTTSEnabled()
+  return isTTSEnabled
 end
 
 function WeakAuras.IsDBMRegistered()

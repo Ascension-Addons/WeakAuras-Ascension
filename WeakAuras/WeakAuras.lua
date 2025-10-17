@@ -2853,19 +2853,20 @@ function Private.UpdateSoundIcon(data)
   end
 
   -- tts
-  if WeakAuras.IsAwesomeEnabled() ~= 2 then return end
-  if (data.actions.start.do_message and data.actions.start.message_type == "TTS")
-  or (data.actions.finish.do_message and data.actions.finish.message_type == "TTS")
-  then
-    Private.AuraWarnings.UpdateWarning(data.uid, "tts_action", "tts", L["This aura plays a Text To Speech via an action."])
-  else
-    Private.AuraWarnings.UpdateWarning(data.uid, "tts_action")
-  end
+  if WeakAuras.IsTTSEnabled() then
+    if (data.actions.start.do_message and data.actions.start.message_type == "TTS")
+      or (data.actions.finish.do_message and data.actions.finish.message_type == "TTS")
+    then
+      Private.AuraWarnings.UpdateWarning(data.uid, "tts_action", "tts", L["This aura plays a Text To Speech via an action."])
+    else
+      Private.AuraWarnings.UpdateWarning(data.uid, "tts_action")
+    end
 
-  if ttsCondition then
-    Private.AuraWarnings.UpdateWarning(data.uid, "tts_condition", "tts", L["This aura plays a Text To Speech via a condition."])
-  else
-    Private.AuraWarnings.UpdateWarning(data.uid, "tts_condition")
+    if ttsCondition then
+      Private.AuraWarnings.UpdateWarning(data.uid, "tts_condition", "tts", L["This aura plays a Text To Speech via a condition."])
+    else
+      Private.AuraWarnings.UpdateWarning(data.uid, "tts_condition")
+    end
   end
 end
 
@@ -2955,9 +2956,6 @@ function WeakAuras.PreAdd(data, snapshot)
     end
   end
   validateUserConfig(data, data.authorOptions, data.config)
-  if not(WeakAuras.IsAwesomeEnabled()) then
-    removeNameplateUnitsAndAnchors(data)
-  end
   data.init_started = nil
   data.init_completed = nil
   data.expanded = nil
@@ -3365,7 +3363,7 @@ function Private.HandleChatAction(message_type, message, message_dest, message_d
   if(message_type == "PRINT") then
     DEFAULT_CHAT_FRAME:AddMessage(message, r or 1, g or 1, b or 1);
   elseif message_type == "TTS" then
-    if WeakAuras.IsAwesomeEnabled() == 2 then
+    if WeakAuras.IsTTSEnabled() then
       if not Private.SquelchingActions() then
         pcall(function()
         local voice = C_TTSSettings and C_TTSSettings.GetSpeechVoiceID()
