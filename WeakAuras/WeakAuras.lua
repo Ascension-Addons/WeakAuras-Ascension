@@ -1616,6 +1616,7 @@ local function scanForLoadsImpl(toCheck, event, arg1, ...)
 
   local ruleset = WeakAuras.Ruleset()
   local specialization = SpecializationUtil.GetActiveSpecialization()
+  local manastorm = C_Manastorm.IsInManastorm()
 
   local changed = 0;
   local shouldBeLoaded, couldBeLoaded;
@@ -1628,8 +1629,8 @@ local function scanForLoadsImpl(toCheck, event, arg1, ...)
     if (data and not data.controlledChildren) then
       local loadFunc = loadFuncs[id];
       local loadOpt = loadFuncsForOptions[id];
-      shouldBeLoaded = loadFunc and loadFunc("ScanForLoads_Auras", inCombat, alive, inEncounter, pvp, vehicle, vehicleUi, mounted, class, specialization, player, realm, guild, race, faction, playerLevel, role, role, raidRole, group, groupSize, raidMemberType, ruleset, zone, zoneId, subzone, encounter_id, size, difficulty);
-      couldBeLoaded =  loadOpt and loadOpt("ScanForLoads_Auras",   inCombat, alive, inEncounter, pvp, vehicle, vehicleUi, mounted, class, specialization, player, realm, guild, race, faction, playerLevel, role, role, raidRole, group, groupSize, raidMemberType, ruleset, zone, zoneId, subzone, encounter_id, size, difficulty);
+      shouldBeLoaded = loadFunc and loadFunc("ScanForLoads_Auras", inCombat, alive, inEncounter, pvp, manastorm, vehicle, vehicleUi, mounted, class, specialization, player, realm, guild, race, faction, playerLevel, role, role, raidRole, group, groupSize, raidMemberType, ruleset, zone, zoneId, subzone, encounter_id, size, difficulty);
+      couldBeLoaded =  loadOpt and loadOpt("ScanForLoads_Auras",   inCombat, alive, inEncounter, pvp, manastorm, vehicle, vehicleUi, mounted, class, specialization, player, realm, guild, race, faction, playerLevel, role, role, raidRole, group, groupSize, raidMemberType, ruleset, zone, zoneId, subzone, encounter_id, size, difficulty);
 
       if(shouldBeLoaded and not loaded[id]) then
         changed = changed + 1;

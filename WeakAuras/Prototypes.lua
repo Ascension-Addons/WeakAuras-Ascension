@@ -1021,6 +1021,14 @@ Private.load_prototype = {
       events = {"PLAYER_FLAGS_CHANGED", "UNIT_FACTION", "ZONE_CHANGED"}
     },
     {
+      name = "manastorm",
+      display = L["In Manastorm"],
+      type = "toggle",
+      init = "arg",
+      width = WeakAuras.normalWidth,
+      events = {"ACTIVE_MANASTORM_UPDATED"}
+    },
+    {
       name = "vehicle",
       display = L["In Vehicle"],
       type = "tristate",
@@ -7839,6 +7847,22 @@ Private.event_prototypes = {
         display = L["Defensive Stats"],
       },
       {
+        name = "defensevalue",
+        display = L["Defense Value"],
+        type = "number",
+        init = "UnitDefense('player')",
+        store = true,
+        conditionType = "number"
+      },
+      {
+        name = "defensepercent",
+        display = L["Defense (%)"],
+        type = "number",
+        init = "0.04 * ( UnitDefense('player') + select(2,UnitDefense('player') ) - UnitLevel('player')*5 )",
+        store = true,
+        conditionType = "number"
+      },
+      {
         name = "dodgerating",
         display = L["Dodge Rating"],
         type = "number",
@@ -7937,6 +7961,14 @@ Private.event_prototypes = {
           limit = 2
         },
         formatter = "Number",
+      },
+      {
+        name = "avoidancetotalpercent",
+        display = L["Total Avoidance (%)"],
+        type = "number",
+        init = "0.04 * ( UnitDefense('player') + select(2,UnitDefense('player') ) - UnitLevel('player')*5 ) + GetDodgeChance() + GetParryChance() + GetBlockChance()",
+        store = true,
+        conditionType = "number"
       },
     },
     automaticrequired = true,
