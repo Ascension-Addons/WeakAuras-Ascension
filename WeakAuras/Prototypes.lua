@@ -892,16 +892,40 @@ function WeakAuras.GetEffectiveRangedAttackPower()
   return base + pos + neg
 end
 
-local function valuesForTalentFunction(trigger)
-  return function()
-    local single_class = Private.checkForSingleLoadCondition(trigger, "class")
-    if not single_class then
-      single_class = select(2, UnitClass("player"));
-    end
-
-    return Private.talentInfo[single_class]
+function WeakAuras.IsTalentKnownForLoad(spell, exact)
+  local result = WeakAuras.IsTalentKnown(spell)
+  if exact or result then
+    return result
   end
+  return false
 end
+
+function WeakAuras.IsTalentKnown(spell)
+  if (spell) then
+    if tonumber(spell) then
+      return C_CharacterAdvancement.IsKnownSpellID(spell) and true or false;
+    else
+      -- name of talent zzz
+      if (GetSpellInfo(spell)) then -- maybe talent ability?
+        return true
+      end
+    end
+  end
+  return false
+end
+
+function WeakAuras.IsSpecActive(specID)
+  specID = specID and tonumber(specID)
+  if not specID then return false end
+  return SpecializationUtil.GetActiveSpecialization() == specID
+end
+
+function WeakAuras.IsMysticEnchantApplied(spellID)
+  spellID = spellID and tonumber(spellID)
+  if not spellID then return false end
+  return MysticEnchantUtil.IsEnchantApplied("player", spellID)
+end
+
 
 ---helper to check if a condition is checked and have a single value, and return it
 function Private.checkForSingleLoadCondition(trigger, name, validateFn)
@@ -1036,102 +1060,39 @@ Private.load_prototype = {
       init = "arg"
     },
     {
-      name = "class_and_spec",
-      display = L["Class and Specialization"],
+      name = "specialization",
+      display = L["Talent Specialization"],
       type = "multiselect",
-      values = "spec_types_all",
-      test = "WeakAuras.CheckClassSpec(%s)",
-      events = {"UNIT_SPEC_CHANGED_player", "WA_DELAYED_PLAYER_ENTERING_WORLD"},
+      values = "specialization_types",
+      test = "WeakAuras.IsSpecActive(%s)",
+      preamble = "wipe(WeakAuras.specialization_types) for i = 1, SpecializationUtil.GetNumSpecializations() do WeakAuras.specialization_types[i] = i .. \". \" .. SpecializationUtil.GetSpecializationInfo(i) end",
+      events = {"ASCENSION_CA_SPECIALIZATION_ACTIVE_ID_CHANGED"},
+      init = "arg"
     },
     {
-      name = "talent",
+      name = "knowntalent",
       display = L["Talent"],
-      type = "multiselect",
-      values = valuesForTalentFunction,
-      test = "WeakAuras.CheckTalentByIndex(%d, %d)",
-      multiConvertKey = nil,
-      events = {"PLAYER_TALENT_UPDATE", "SPELL_UPDATE_USABLE"},
-      inverse = nil,
-      extraOption = nil,
-      control = "WeakAurasMiniTalent",
-      multiNoSingle = true, -- no single mode
-      multiTristate = true, -- values can be true/false/nil
-      multiAll = true, -- require all tests
-      orConjunctionGroup = "talent",
-      multiUseControlWhenFalse = true,
-      enable = function(trigger)
-        return (Private.checkForSingleLoadCondition(trigger, "class") ~= nil)
-      end,
-      hidden = function(trigger)
-        return not (Private.checkForSingleLoadCondition(trigger, "class") ~= nil)
-      end,
+      type = "talent",
+      test = "WeakAuras.IsTalentKnownForLoad(%s, %s)",
+      events = {"ASCENSION_KNOWN_ENTRIES_UPDATED"},
+      orConjunctionGroup = "knowntalent",
+      showExactOption = true,
     },
     {
-      name = "talent2",
-      display = L["Or Talent"],
-      type = "multiselect",
-      values = valuesForTalentFunction,
-      test = "WeakAuras.CheckTalentByIndex(%d, %d)",
-      multiConvertKey = nil,
-      events = {"PLAYER_TALENT_UPDATE", "SPELL_UPDATE_USABLE"},
-      inverse = nil,
-      extraOption = nil,
-      control = "WeakAurasMiniTalent",
-      multiNoSingle = true, -- no single mode
-      multiTristate = true, -- values can be true/false/nil
-      multiAll = true, -- require all tests
-      orConjunctionGroup = "talent",
-      multiUseControlWhenFalse = true,
-      enable = function(trigger)
-        return (trigger.use_talent ~= nil or trigger.use_talent2 ~= nil) and (
-          (Private.checkForSingleLoadCondition(trigger, "class") ~= nil)
-        )
-      end,
-      hidden = function(trigger)
-        return not((trigger.use_talent ~= nil or trigger.use_talent2 ~= nil) and (
-          (Private.checkForSingleLoadCondition(trigger, "class") ~= nil))
-        )
-      end,
+      name = "mysticenchantactive",
+      display = L["Mystic Enchant"],
+      type = "mysticenchant",
+      test = "WeakAuras.IsMysticEnchantApplied(%s)",
+      events = {"MYSTIC_ENCHANT_PRESET_SET_ACTIVE_RESULT", "MYSTIC_ENCHANT_SLOT_UPDATE", "PLAYER_EQUIPMENT_CHANGED", "SPELLS_CHANGED"},
+      showExactOption = true,
     },
     {
-      name = "talent3",
-      display = L["Or Talent"],
-      type = "multiselect",
-      values = valuesForTalentFunction,
-      test = "WeakAuras.CheckTalentByIndex(%d, %d)",
-      multiConvertKey = nil,
-      events = {"PLAYER_TALENT_UPDATE", "SPELL_UPDATE_USABLE"},
-      inverse = nil,
-      extraOption = nil,
-      control = "WeakAurasMiniTalent",
-      multiNoSingle = true, -- no single mode
-      multiTristate = true, -- values can be true/false/nil
-      multiAll = true, -- require all tests
-      orConjunctionGroup = "talent",
-      multiUseControlWhenFalse = true,
-      enable = function(trigger)
-        return ((trigger.use_talent ~= nil and trigger.use_talent2 ~= nil) or trigger.use_talent3 ~= nil) and (
-          (Private.checkForSingleLoadCondition(trigger, "class") ~= nil)
-        )
-      end,
-      hidden = function(trigger)
-        return not(((trigger.use_talent ~= nil and trigger.use_talent2 ~= nil) or trigger.use_talent3 ~= nil) and (
-          (Private.checkForSingleLoadCondition(trigger, "class") ~= nil)
-        ))
-      end
-    },
-    {
-      name = "glyph",
-      display = L["Glyph"],
-      type = "multiselect",
-      values = function(trigger)
-        Private.InitializeGlyphs(trigger and trigger.glyph)
-        return Private.glyph_types
-      end,
-      sorted = true,
-      sortOrder = Private.glyph_sorted or {},
-      test = "WeakAuras.IsGlyphActive(%s)",
-      events = {"GLYPH_ADDED", "GLYPH_REMOVED", "GLYPH_UPDATED", "USE_GLYPH"},
+      name = "not_mysticenchantactive",
+      display = WeakAuras.newFeatureString .. L["|cFFFF0000Not|r Mystic Enchant"],
+      type = "mysticenchant",
+      test = "not WeakAuras.IsMysticEnchantApplied(%s)",
+      events = {"MYSTIC_ENCHANT_PRESET_SET_ACTIVE_RESULT", "MYSTIC_ENCHANT_SLOT_UPDATE", "PLAYER_EQUIPMENT_CHANGED", "SPELLS_CHANGED"},
+      showExactOption = true,
     },
     {
       name = "spellknown",
@@ -1146,7 +1107,7 @@ Private.load_prototype = {
       display = WeakAuras.newFeatureString .. L["|cFFFF0000Not|r Spell Known"],
       type = "spell",
       test = "not WeakAuras.IsSpellKnownForLoad(%s, %s)",
-      events = {"SPELLS_CHANGED", "UNIT_PET"},
+      events = {"SPELLS_CHANGED", "UNIT_PET", "CHARACTER_ADVANCEMENT_PENDING_BUILD_UPDATED"},
       showExactOption = true
     },
     {
@@ -1275,6 +1236,15 @@ Private.load_prototype = {
       values = "group_member_types",
       test = "Private.ExecEnv.CheckGroupMemberType(%s, group_leader)",
       optional = true,
+    },
+    {
+      name = "ruleset",
+      display = "PvP Ruleset",
+      type = "multiselect",
+      width = WeakAuras.normalWidth,
+      init = "arg",
+      values = "ruleset_types",
+      events = {"ZONE_CHANGED_NEW_AREA", "PLAYER_FLAGS_CHANGED"}
     },
     {
       name ="locationTitle",
@@ -8011,6 +7981,10 @@ Private.event_prototypes = {
         tinsert(events, "PARTY_MEMBERS_CHANGED")
         tinsert(events, "RAID_ROSTER_UPDATE")
       end
+      if trigger.use_ruleset ~= nil then
+        tinsert(events, "ZONE_CHANGED_NEW_AREA")
+        tinsert(events, "PLAYER_FLAGS_CHANGED")
+      end
       if trigger.use_instance_difficulty ~= nil
           or trigger.use_instance_size ~= nil
       then
@@ -8128,8 +8102,16 @@ Private.event_prototypes = {
         events = {"PARTY_MEMBERS_CHANGED", "RAID_ROSTER_UPDATE"}
       },
       {
+        name = "ruleset",
+        display = "PvP Ruleset",
+        type = "multiselect",
+        values = "ruleset_types",
+        init = "WeakAuras.Ruleset()",
+        events = {"ZONE_CHANGED_NEW_AREA", "PLAYER_FLAGS_CHANGED"}
+      },
+      {
         name = "instance_size",
-        display = L["Instance Type"].." "..L["|cffff0000deprecated|r"],
+        display = L["Instance Type"],
         desc = constants.instanceFilterDeprecated,
         type = "multiselect",
         values = "instance_types",
@@ -8139,7 +8121,7 @@ Private.event_prototypes = {
       },
       {
         name = "instance_difficulty",
-        display = L["Instance Difficulty"].." "..L["|cffff0000deprecated|r"],
+        display = L["Instance Difficulty"],
         desc = constants.instanceFilterDeprecated,
         type = "multiselect",
         values = "difficulty_types",

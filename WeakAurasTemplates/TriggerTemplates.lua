@@ -1624,7 +1624,7 @@ function WeakAuras.CreateTemplateView(Private, frame)
     replaceButton:SetFullWidth(true);
     replaceButton:SetClick(function()
       replaceTriggers(newView.data, newView.chosenItem, newView.chosenSubType);
-      for _,v in pairs({"class", "spec", "talent", "pvptalent", "race", "covenant"}) do
+      for _,v in pairs({"class", "spec", "pvptalent", "race", "covenant"}) do
         newView.data.load[v] = nil;
         newView.data.load["use_"..v] = nil;
       end

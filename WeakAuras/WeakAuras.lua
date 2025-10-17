@@ -747,7 +747,7 @@ local function singleTest(arg, trigger, use, name, value, operator, use_exact, c
         return name;
       end
     end
-  elseif (arg.type == "spell") then
+  elseif (arg.type == "spell" or arg.type == "talent" or arg.type == "mysticenchant") then
     if arg.showExactOption then
       return "("..arg.test:format(value, tostring(use_exact) or "false") ..")";
     else
@@ -841,6 +841,9 @@ local function ConstructFunction(prototype, trigger, skipOptional)
           end
         else
           local value = trigger[name]
+          if name == "knowntalent" then
+            dprint(WeakAuras.IsTalentKnownForLoad(value))
+          end
           local operator = name and trigger[name.."_operator"]
           local caseInsensitive = name and trigger[name.."_caseInsensitive"]
           local use_exact = name and trigger["use_exact_" .. name]
@@ -1473,6 +1476,20 @@ function Private.ExecEnv.GroupType()
   return "solo";
 end
 
+function WeakAuras.Ruleset()
+  local ruleset = C_Player:GetRuleset()
+  if ruleset == Enum.Ruleset.NoRiskPvE then
+    return "pve"
+  end
+  if ruleset == Enum.Ruleset.NoRiskPvP then
+    return "pvp"
+  end
+  if ruleset == Enum.Ruleset.HighRiskPvP then
+    return "highrisk"
+  end
+  return "none"
+end
+
 local function GetInstanceTypeAndSize()
   local size, difficulty
   local inInstance, Type = IsInInstance()
@@ -1502,10 +1519,14 @@ local function GetInstanceTypeAndSize()
         difficulty = "heroic"
       end
     else
-      if difficultyIndex == 1 or difficultyIndex == 2 then
+      if difficultyIndex == 1 then
         difficulty = "normal"
-      elseif difficultyIndex == 3 or difficultyIndex == 4 then
+      elseif difficultyIndex == 2 then
         difficulty = "heroic"
+      elseif difficultyIndex == 3 then
+        difficulty = "mythic"
+      elseif difficultyIndex == 4 then
+        difficulty = "ascended"
       end
     end
     return size, difficulty, instanceType, ZoneMapID
@@ -1593,6 +1614,9 @@ local function scanForLoadsImpl(toCheck, event, arg1, ...)
   local group = Private.ExecEnv.GroupType()
   local groupSize = GetNumGroupMembers()
 
+  local ruleset = WeakAuras.Ruleset()
+  local specialization = SpecializationUtil.GetActiveSpecialization()
+
   local changed = 0;
   local shouldBeLoaded, couldBeLoaded;
   local parentsToCheck = {}
@@ -1604,8 +1628,8 @@ local function scanForLoadsImpl(toCheck, event, arg1, ...)
     if (data and not data.controlledChildren) then
       local loadFunc = loadFuncs[id];
       local loadOpt = loadFuncsForOptions[id];
-      shouldBeLoaded = loadFunc and loadFunc("ScanForLoads_Auras", inCombat, alive, inEncounter, pvp, vehicle, vehicleUi, mounted, class, player, realm, guild, race, faction, playerLevel, role, role, raidRole, group, groupSize, raidMemberType, zone, zoneId, subzone, encounter_id, size, difficulty);
-      couldBeLoaded =  loadOpt and loadOpt("ScanForLoads_Auras",   inCombat, alive, inEncounter, pvp, vehicle, vehicleUi, mounted, class, player, realm, guild, race, faction, playerLevel, role, role, raidRole, group, groupSize, raidMemberType, zone, zoneId, subzone, encounter_id, size, difficulty);
+      shouldBeLoaded = loadFunc and loadFunc("ScanForLoads_Auras", inCombat, alive, inEncounter, pvp, vehicle, vehicleUi, mounted, class, specialization, player, realm, guild, race, faction, playerLevel, role, role, raidRole, group, groupSize, raidMemberType, ruleset, zone, zoneId, subzone, encounter_id, size, difficulty);
+      couldBeLoaded =  loadOpt and loadOpt("ScanForLoads_Auras",   inCombat, alive, inEncounter, pvp, vehicle, vehicleUi, mounted, class, specialization, player, realm, guild, race, faction, playerLevel, role, role, raidRole, group, groupSize, raidMemberType, ruleset, zone, zoneId, subzone, encounter_id, size, difficulty);
 
       if(shouldBeLoaded and not loaded[id]) then
         changed = changed + 1;
@@ -1694,6 +1718,7 @@ loadFrame:RegisterEvent("PLAYER_REGEN_DISABLED");
 loadFrame:RegisterEvent("PLAYER_REGEN_ENABLED");
 loadFrame:RegisterEvent("PLAYER_ROLES_ASSIGNED");
 loadFrame:RegisterEvent("SPELLS_CHANGED");
+loadFrame:RegisterEvent("ASCENSION_KNOWN_ENTRIES_UPDATED");
 loadFrame:RegisterEvent("UNIT_INVENTORY_CHANGED")
 loadFrame:RegisterEvent("PLAYER_EQUIPMENT_CHANGED")
 loadFrame:RegisterEvent("PLAYER_DEAD")

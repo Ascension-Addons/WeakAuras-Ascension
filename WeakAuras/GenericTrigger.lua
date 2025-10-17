@@ -236,7 +236,7 @@ local function singleTest(arg, trigger, name, value, operator, use_exact)
     return TestForMultiSelect(trigger, arg);
   elseif(arg.type == "toggle") then
     return TestForToggle(trigger, arg);
-  elseif (arg.type == "spell" or arg.type == "item") then
+  elseif (arg.type == "spell" or arg.type == "item" or arg.type == "talent" or arg.type == "mysticenchant") then
     if arg.test then
       if arg.showExactOption then
         return "("..arg.test:format(value, tostring(use_exact) or "false") ..")";

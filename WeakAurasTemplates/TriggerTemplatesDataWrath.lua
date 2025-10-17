@@ -1137,22 +1137,6 @@ local function handleItem(item)
       end
     end
   end
-  if (item.talent) then
-    item.load = item.load or {};
-    if type(item.talent) == "table" then
-      item.load.talent = { multi = {} };
-      for _,v in pairs(item.talent) do
-        item.load.talent.multi[v] = true;
-      end
-      item.load.use_talent = false;
-    else
-      item.load.talent = {
-        single = item.talent,
-				multi = {},
-      };
-      item.load.use_talent = true;
-    end
-  end
   if (item.pvptalent) then
     item.load = item.load or {};
     item.load.use_pvptalent = true;

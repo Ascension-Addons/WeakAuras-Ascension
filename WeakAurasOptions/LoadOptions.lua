@@ -45,6 +45,70 @@ local function CorrectSpellName(input)
   end
 end
 
+local function CorrectTalentName(input)
+  local inputId = tonumber(input);
+  if(inputId) then
+    local name = GetSpellInfo(inputId);
+    if(name) then
+      return inputId;
+    else
+      return nil;
+    end
+  elseif type(input) == "string" and input ~= "" then
+    local link
+    if(input:sub(1,1) == "\124") then
+      link = input
+    else
+      link = GetSpellLink(input)
+    end
+    if(link) and link ~= "" then
+      local spellId = link:match("spell:(%d+)");
+      return tonumber(spellId);
+    end
+    local spells = spellCache.GetSpellsMatching(input)
+    if type(spells) == "table" then
+      for id in pairs(spells) do
+        if tonumber(id) and id ~= 0 and C_CharacterAdvancement.IsKnownSpellID(id) then
+          return id
+        end
+      end
+      return next(spells)
+    end
+  end
+end
+
+local function CorrectMysticEnchantName(input)
+  local inputId = tonumber(input);
+  if(inputId) then
+    local name = GetSpellInfo(inputId);
+    if(name) then
+      return inputId;
+    else
+      return nil;
+    end
+  elseif type(input) == "string" and input ~= "" then
+    local link
+    if(input:sub(1,1) == "\124") then
+      link = input
+    else
+      link = GetSpellLink(input)
+    end
+    if(link) and link ~= "" then
+      local spellId = link:match("spell:(%d+)");
+      return tonumber(spellId);
+    end
+    local spells = spellCache.GetSpellsMatching(input)
+    if type(spells) == "table" then
+      for id in pairs(spells) do
+        if tonumber(id) and id ~= 0 and C_CharacterAdvancement.IsKnownSpellID(id) then
+          return id
+        end
+      end
+      return next(spells)
+    end
+  end
+end
+
 local function CorrectItemName(input)
   local inputId = tonumber(input);
   if(inputId) then
@@ -355,7 +419,7 @@ function OptionsPrivate.ConstructOptions(prototype, data, startorder, triggernum
       if(arg.type == "toggle" or arg.type == "tristate") then
         options["use_"..name].width = arg.width or WeakAuras.doubleWidth;
       end
-      if(arg.type == "spell" or arg.type == "aura" or arg.type == "item") then
+      if(arg.type == "spell" or arg.type == "aura" or arg.type == "item" or arg.type == "talent" or arg.type == "mysticenchant") then
         if not arg.showExactOption then
           options["use_"..name].width = (arg.width or WeakAuras.normalWidth) - 0.2;
         end
@@ -602,7 +666,7 @@ function OptionsPrivate.ConstructOptions(prototype, data, startorder, triggernum
             };
             order = order + 1;
           end
-        elseif(arg.type == "spell" or arg.type == "aura" or arg.type == "item") then
+        elseif(arg.type == "spell" or arg.type == "aura" or arg.type == "item" or arg.type == "talent" or arg.type == "mysticenchant") then
           if entryNumber > 1 then
             options["spacer_"..name..suffix].width = WeakAuras.normalWidth - (arg.showExactOption and 0 or 0.2)
           end
@@ -648,7 +712,7 @@ function OptionsPrivate.ConstructOptions(prototype, data, startorder, triggernum
                 if(arg.type == "aura") then
                   local icon = spellCache.GetIcon(value);
                   return icon and tostring(icon) or "", 18, 18;
-                elseif(arg.type == "spell") then
+                elseif(arg.type == "spell" or arg.type == "talent" or arg.type == "mysticenchant") then
                   local name, _, icon = GetSpellInfo(value);
                   if arg.noValidation then
                     -- GetSpellInfo and other wow apis are case insensitive, but the later matching we do
@@ -672,7 +736,7 @@ function OptionsPrivate.ConstructOptions(prototype, data, startorder, triggernum
               if type(value) ~= "number" and type(value) ~= "string" then
                 return true
               end
-              return not ((arg.type == "aura" and value and spellCache.GetIcon(value)) or (arg.type == "spell" and value and GetSpellInfo(value)) or (arg.type == "item" and value and GetItemIcon(value)))
+              return not ((arg.type == "aura" and value and spellCache.GetIcon(value)) or ((arg.type == "spell" or arg.type == "talent" or arg.type == "mysticenchant") and value and GetSpellInfo(value)) or (arg.type == "item" and value and GetItemIcon(value)))
             end
           };
           order = order + 1;
@@ -708,7 +772,7 @@ function OptionsPrivate.ConstructOptions(prototype, data, startorder, triggernum
                 else
                   return nil;
                 end
-              elseif(arg.type == "spell") then
+              elseif(arg.type == "spell"  or arg.type == "talent" or arg.type == "mysticenchant") then
                 local useExactSpellId = (arg.showExactOption and getValue(trigger, nil, "use_exact_"..realname, multiEntry, entryNumber))
                                         or arg.only_exact
                 if value and value ~= "" and (type(value) == "number" or type(value) == "string") then
@@ -744,6 +808,10 @@ function OptionsPrivate.ConstructOptions(prototype, data, startorder, triggernum
                   fixedInput = WeakAuras.spellCache.CorrectAuraName(v);
                 elseif(arg.type == "spell") then
                   fixedInput = CorrectSpellName(v);
+                elseif(arg.type == "talent") then
+                  fixedInput = CorrectTalentName(v);
+                elseif(arg.type == "mysticenchant") then
+                  fixedInput = CorrectMysticEnchantName(v);
                 elseif(arg.type == "item") then
                   fixedInput = CorrectItemName(v);
                 end

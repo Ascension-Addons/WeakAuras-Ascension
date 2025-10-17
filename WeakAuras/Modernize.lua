@@ -1930,9 +1930,6 @@ function Private.Modernize(data, oldSnapshot)
   if data.internalVersion < 77 then
     -- fix data broken by wago export
     local triggerFix = {
-      talent = {
-        multi = true
-      },
       herotalent = {
         multi = true
       },
@@ -1946,15 +1943,6 @@ function Private.Modernize(data, oldSnapshot)
       arena_spec = true
     }
     local loadFix = {
-      talent = {
-        multi = true
-      },
-      talent2 = {
-        multi = true
-      },
-      talent3 = {
-        multi = true
-      },
       herotalent = {
         multi = true
       },
