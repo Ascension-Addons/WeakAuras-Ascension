@@ -2421,6 +2421,7 @@ do
     -- This can probably be simplfied
     spellCds = CreateSpellCDHandler(),
     spellCdsRune = CreateSpellCDHandler(),
+    spellCdsCharges = CreateSpellCDHandler(),
     spellCdsOnlyCooldown = CreateSpellCDHandler(),
     spellCdsOnlyCooldownRune = CreateSpellCDHandler(),
 
@@ -2436,11 +2437,13 @@ do
       local spellDetail = self.data[spellId]
       spellDetail.known = WeakAuras.IsSpellKnownIncludingPet(spellId)
 
-      local startTime, duration, unifiedCooldownBecauseRune,
-            startTimeCooldown, durationCooldown, cooldownBecauseRune,
+      local charges, maxCharges, startTime, duration, unifiedCooldownBecauseRune,
+            startTimeCooldown, durationCooldown, cooldownBecauseRune, startTimeCharges, durationCharges,
             spellCount, paused
             = WeakAuras.GetSpellCooldownUnified(spellId, GetRuneDuration());
 
+      spellDetail.charges = charges
+      spellDetail.chargesMax = maxCharges
       spellDetail.count = spellCount
       self.spellCds:HandleSpell(spellId, startTime, duration, paused)
       if not unifiedCooldownBecauseRune then
@@ -2450,6 +2453,7 @@ do
       if not cooldownBecauseRune then
         self.spellCdsOnlyCooldownRune:HandleSpell(spellId, startTimeCooldown, durationCooldown, paused)
       end
+      self.spellCdsCharges:HandleSpell(spellId, startTimeCharges, durationCharges, paused)
     end,
 
     -- Actual api
@@ -2488,8 +2492,8 @@ do
     end,
 
     CheckSpellCooldown = function(self, spellId, runeDuration)
-      local startTime, duration, unifiedCooldownBecauseRune,
-        startTimeCooldown, durationCooldown, cooldownBecauseRune,
+      local charges, maxCharges, startTime, duration, unifiedCooldownBecauseRune,
+        startTimeCooldown, durationCooldown, cooldownBecauseRune, startTimeCharges, durationCharges,
         spellCount, paused
         = WeakAuras.GetSpellCooldownUnified(spellId, runeDuration);
 
@@ -2497,8 +2501,10 @@ do
 
       local spellDetail = self.data[spellId]
 
-      local chargesChanged = spellDetail.count ~= spellCount
-      local chargesDifference = (spellCount or 0) - (spellDetail.count or 0)
+      local chargesChanged = spellDetail.charges ~= charges or spellDetail.count ~= spellCount or spellDetail.chargesMax ~= maxCharges
+      local chargesDifference = (charges or spellCount or 0) - (spellDetail.charges or spellDetail.count or 0)
+      spellDetail.charges = charges
+      spellDetail.chargesMax = maxCharges
       spellDetail.count = spellCount
       if chargesDifference ~= 0 then
         if chargesDifference > 0 then
@@ -2520,6 +2526,8 @@ do
       if not cooldownBecauseRune then
         changed = self.spellCdsOnlyCooldownRune:HandleSpell(spellId, startTimeCooldown, durationCooldown, paused) or changed
       end
+      local chargeChanged = self.spellCdsCharges:HandleSpell(spellId, startTimeCharges, durationCharges)
+      changed = chargeChanged or changed
 
       if not WeakAuras.IsPaused() then
         if nowReady then
@@ -2574,7 +2582,7 @@ do
       if not spellDetail.known and not ignoreSpellKnown then
         return
       end
-      return spellDetail.count, spellDetail.count, spellDetail.count, spellDetail.chargeGainTime, spellDetail.chargeLostTime
+      return spellDetail.charges, spellDetail.chargesMax, spellDetail.count, spellDetail.chargeGainTime, spellDetail.chargeLostTime
     end,
 
     GetSpellCooldown = function(self, spellId, ignoreRuneCD, showgcd, ignoreSpellKnown, track)
@@ -2582,7 +2590,9 @@ do
         return;
       end
       local startTime, duration, paused, gcdCooldown, readyTime
-      if track == "cooldown" then
+      if track == "charges" then
+        startTime, duration, paused, readyTime = self.spellCdsCharges:FetchSpellCooldown(spellId)
+      elseif track == "cooldown" then
         if ignoreRuneCD then
           startTime, duration, paused, readyTime = self.spellCdsOnlyCooldownRune:FetchSpellCooldown(spellId)
         else
@@ -2620,6 +2630,7 @@ do
     Private.frames["Cooldown Trigger Handler"] = cdReadyFrame
     cdReadyFrame:RegisterEvent("RUNE_POWER_UPDATE");
     cdReadyFrame:RegisterEvent("RUNE_TYPE_UPDATE");
+    cdReadyFrame:RegisterEvent("SPELL_UPDATE_CHARGES");
     cdReadyFrame:RegisterEvent("PLAYER_TALENT_UPDATE");
     cdReadyFrame:RegisterEvent("CHARACTER_POINTS_CHANGED");
     cdReadyFrame:RegisterEvent("SPELL_UPDATE_COOLDOWN");
@@ -2668,7 +2679,8 @@ do
         end
       elseif(event == "SPELL_UPDATE_COOLDOWN" or event == "SPELL_UPDATE_USABLE"
         or event == "RUNE_POWER_UPDATE" or event == "RUNE_TYPE_UPDATE"
-        or event == "PLAYER_TALENT_UPDATE" or event == "CHARACTER_POINTS_CHANGED")
+        or event == "PLAYER_TALENT_UPDATE" or event == "CHARACTER_POINTS_CHANGED"
+        or event == "SPELL_UPDATE_CHARGES")
       then
         if event == "SPELL_UPDATE_COOLDOWN" then
           mark_ACTIONBAR_UPDATE_COOLDOWN = nil
@@ -2851,8 +2863,19 @@ do
     local startTimeCooldown, durationCooldown, enabled = GetSpellCooldown(id)
     enabled = enabled == 1 and true or false
 
+    local charges, maxCharges, startTimeCharges, durationCharges
+    if type(id) == "string" then
+      charges, maxCharges, startTimeCharges, durationCharges = GetSpellCharges(C_Spell:GetSpellID(id));
+    else
+      charges, maxCharges, startTimeCharges, durationCharges = GetSpellCharges(id);
+    end
+
+
     startTimeCooldown = startTimeCooldown or 0;
     durationCooldown = durationCooldown or 0;
+
+    startTimeCharges = startTimeCharges or 0;
+    durationCharges = durationCharges or 0;
 
     -- WORKAROUND: Sometimes the API returns very high bogus numbers causing client freezes, discard them here. CurseForge issue #1008
     if (durationCooldown > 604800) then
@@ -2888,11 +2911,29 @@ do
     end
 
     local startTime, duration = startTimeCooldown, durationCooldown
-
+    if (maxCharges == 0) then
+      -- maxCharges is 0 if the spell has no charges.
+      -- Nothing to do in that case
+    elseif (charges == maxCharges) then
+      -- At max charges,
+      startTime, duration = 0, 0;
+      startTimeCharges, durationCharges = 0, 0
+    else
+      -- Spells can return both information via GetSpellCooldown and GetSpellCharges
+      -- E.g. Rune of Power see Github-Issue: #1060
+      -- So if GetSpellCooldown returned a cooldown, use that one, if it's a "significant" cooldown
+      --  Otherwise check GetSpellCharges
+      -- A few abilities have a minor cooldown just to prevent the user from triggering it multiple times,
+      -- ignore them since practically no one wants to see them
+      if duration and duration <= 1.5 or (duration == gcdDuration and startTime == gcdStart) then
+        startTime, duration = startTimeCharges, durationCharges
+        unifiedCooldownBecauseRune = false
+      end
+    end
     local count = GetSpellCount(id)
 
-    return startTime, duration, unifiedCooldownBecauseRune,
-           startTimeCooldown, durationCooldown, cooldownBecauseRune,
+    return charges, maxCharges, startTime, duration, unifiedCooldownBecauseRune,
+           startTimeCooldown, durationCooldown, cooldownBecauseRune, startTimeCharges, durationCharges,
            count, not enabled
   end
 

@@ -3755,7 +3755,7 @@ Private.event_prototypes = {
         local name, _, icon = GetSpellInfo(effectiveSpellId)
         local startTime, duration, gcdCooldown, readyTime, paused = WeakAuras.GetSpellCooldown(effectiveSpellId, ignoreRuneCD, showgcd, ignoreSpellKnown, track)
         local charges, maxCharges, spellCount, chargeGainTime, chargeLostTime = WeakAuras.GetSpellCharges(effectiveSpellId, ignoreSpellKnown)
-        local stacks = spellCount and spellCount > 0 and spellCount or nil;
+        local stacks = maxCharges and maxCharges > 1 and charges or (spellCount and spellCount > 0 and spellCount) or nil;
         if (charges == nil) then
           -- Use fake charges for spells that use GetSpellCooldown
           charges = (duration == 0 or gcdCooldown) and 1 or 0;
@@ -5085,7 +5085,9 @@ Private.event_prototypes = {
         ret = ret .. [=[
         local startTime, duration, gcdCooldown, readyTime, paused = WeakAuras.GetSpellCooldown(effectiveSpellId)
         local charges, maxCharges, spellCount, chargeGainTime, chargeLostTime = WeakAuras.GetSpellCharges(effectiveSpellId)
-        local stacks = spellCount and spellCount > 0 and spellCount or nil
+        local stacks = maxCharges and maxCharges > 1 and charges
+                       or spellCount and spellCount > 0 and spellCount
+                       or nil
         if (charges == nil) then
           charges = (duration == 0 or gcdCooldown) and 1 or 0;
         end
