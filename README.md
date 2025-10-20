@@ -1,8 +1,9 @@
 <div align="center">
 
-# WeakAuras WotLK (3.3.5a)
+# WeakAuras Ascension (3.3.5a backport by Bunny67 & NoM0Re)
+#### Support the original backporter: [![PayPal](https://img.shields.io/badge/Buy_me_a_coffee-100000?style=flat&logo=PayPal&logoColor=white&labelColor=3b7bbf&color=grey)](https://streamelements.com/nom0ree/tip)
 
-[![Discord](https://img.shields.io/discord/259362419372064778?style=flat&logo=discord&label=Discord)](https://discord.gg/UXSc7nt) [![Wiki](https://img.shields.io/badge/wiki-grey?style=flat&logo=github)](https://github.com/NoM0Re/WeakAuras-WotLK/wiki) [![GitHub Issues](https://img.shields.io/github/issues/NoM0Re/WeakAuras-WotLK)](https://github.com/NoM0Re/WeakAuras-WotLK/issues) [![PayPal](https://img.shields.io/badge/Buy_me_a_coffee-100000?style=flat&logo=PayPal&logoColor=white&labelColor=3b7bbf&color=grey)](https://streamelements.com/nom0ree/tip)
+[![Wiki](https://img.shields.io/badge/wiki-grey?style=flat&logo=github)](https://github.com/Ascension-Addons/WeakAuras-Ascension/wiki) [![GitHub Issues](https://img.shields.io/github/issues/Ascension-Addons/WeakAuras-Ascension)](https://github.com/Ascension-Addons/WeakAuras-Ascension/issues) 
 
 ![Logo](https://i.imgur.com/wwbxeCG.jpeg)
 </div>
@@ -26,13 +27,11 @@ WeakAuras is a powerful and flexible framework that allows the display of highly
 To open the options window, type `/wa` or `/weakauras` into your chat and hit enter or use the minimap icon.
 
 ## Install
-
-1. [Download the package](https://github.com/NoM0Re/WeakAuras-WotLK/archive/refs/heads/master.zip).
-2. Open the archive, then open folder `WeakAuras-WotLK-master`, extract all folders to `Interface\AddOns`.
+1. Install from the Ascension Launcher.
 
 ## Extensions
 
-* [WeakAuras Companion](https://weakauras.wtf): This application adds the missing link between Wago.io and the World of Warcraft addon, enabling you to update your auras in a convenient fashion. Read about how to use it [here](https://github.com/NoM0Re/WeakAuras-WotLK/wiki/WeakAuras-Companion).
+* [WeakAuras Companion](https://weakauras.wtf): This application adds the missing link between Wago.io and the World of Warcraft addon, enabling you to update your auras in a convenient fashion. Read about how to use it [here](https://github.com/Ascension-Addons/WeakAuras-Ascension/wiki/WeakAuras-Companion).
 * [WeakAuras_StopMotion](https://www.curseforge.com/wow/addons/weakauras-stop-motion): This addon adds a new region type to WeakAuras that allows for stop motion animations. Stop Motion textures contain each frame of the animation as a separate image. The addon ships with a number of animations and it supports custom textures.
 - [bKader Shared Media](https://github.com/bkader/SharedMedia): For more bar, textures, fonts, sounds, with alot custom stuff added (popular version).
 - [SharedMedia](https://github.com/NoM0Re/SharedMedia): For more bar textures, fonts (retail version).
@@ -42,7 +41,7 @@ To open the options window, type `/wa` or `/weakauras` into your chat and hit en
 
 ## Documentation
 
-For in-depth documentation, see the [wiki](https://github.com/NoM0Re/WeakAuras-WotLK/wiki) page.
+For in-depth documentation, see the [wiki](https://github.com/Ascension-Addons/WeakAuras-Ascension/wiki) page.
 
 ## Examples
 
@@ -50,9 +49,9 @@ For some examples of what WeakAuras can do, take a look at [wago.io](https://wag
 
 ## Problems
 
-* Please see the [wiki](https://github.com/NoM0Re/WeakAuras-WotLK/wiki) page.
-* If you've discovered something that's clearly wrong, or if you get an error, please create a [ticket](https://github.com/NoM0Re/WeakAuras-WotLK/issues).
+* Please see the [wiki](https://github.com/Ascension-Addons/WeakAuras-Ascension/wiki) page.
+* If you've discovered something that's clearly wrong, or if you get an error, please create a [ticket](https://github.com/Ascension-Addons/WeakAuras-Ascension/issues).
 * You're a programmer yourself and want to contribute? Check out our [contributing guidelines](CONTRIBUTING.md) to get started!
-* Feel free to join our [Discord Community](https://discord.gg/UXSc7nt) to talk, get help and discuss everything WeakAuras!
+* Feel free to join our [Discord Community](https://discord.gg/classlesswow) to talk, get help and discuss everything Ascension!
 
 

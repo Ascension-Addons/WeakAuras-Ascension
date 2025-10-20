@@ -1,10 +1,10 @@
 local L = WeakAuras.L
 
 -- WeakAuras
-L[ [=[ Filter formats: 'Name', 'Name-Realm', '-Realm'. 
+L[ [=[ Filter formats: 'Name', 'Name-Realm', '-Realm'.
 
 Supports multiple entries, separated by commas
-Can use \ to escape -.]=] ] = [=[ Filter formats: 'Name', 'Name-Realm', '-Realm'. 
+Can use \ to escape -.]=] ] = [=[ Filter formats: 'Name', 'Name-Realm', '-Realm'.
 
 Supports multiple entries, separated by commas
 Can use \ to escape -.]=]
@@ -659,7 +659,7 @@ L["Icon Function"] = "Icon Function"
 L["Icon Function (fallback state)"] = "Icon Function (fallback state)"
 L["Id"] = "Id"
 L["ID"] = "ID"
-L["If you require additional assistance, please open a ticket on GitHub or visit our Discord at https://discord.gg/weakauras!"] = "If you require additional assistance, please open a ticket on GitHub or visit our Discord at https://discord.gg/weakauras!"
+L["If you require additional assistance, please open a ticket on GitHub or visit our Discord at https://discord.gg/classlesswow!"] = "If you require additional assistance, please open a ticket on GitHub or visit our Discord at https://discord.gg/classlesswow!"
 L["Ignore Dead"] = "Ignore Dead"
 L["Ignore Disconnected"] = "Ignore Disconnected"
 L["Ignore Rune CD"] = "Ignore Rune CD"
@@ -1331,12 +1331,12 @@ L["Supports multiple entries, separated by commas. Escape ',' with \\. Prefix wi
 L["Supports multiple entries, separated by commas. Escape with \\. Prefix with '-' for negation."] = "Supports multiple entries, separated by commas. Escape with \\. Prefix with '-' for negation."
 L["Supports multiple entries, separated by commas. Prefix with '-' for negation."] = "Supports multiple entries, separated by commas. Prefix with '-' for negation."
 L[ [=[Supports multiple entries, separated by commas. To include child zone ids, prefix with 'c', e.g. 'c2022'.
-Group Zone IDs must be prefixed with 'g', e.g. 'g277'. 
-Supports Area IDs from https://wago.tools/db2/AreaTable prefixed with 'a'. 
+Group Zone IDs must be prefixed with 'g', e.g. 'g277'.
+Supports Area IDs from https://wago.tools/db2/AreaTable prefixed with 'a'.
 Supports Instance IDs prefixed with 'i'.
 Entries can be prefixed with '-' to negate.]=] ] = [=[Supports multiple entries, separated by commas. To include child zone ids, prefix with 'c', e.g. 'c2022'.
-Group Zone IDs must be prefixed with 'g', e.g. 'g277'. 
-Supports Area IDs from https://wago.tools/db2/AreaTable prefixed with 'a'. 
+Group Zone IDs must be prefixed with 'g', e.g. 'g277'.
+Supports Area IDs from https://wago.tools/db2/AreaTable prefixed with 'a'.
 Supports Instance IDs prefixed with 'i'.
 Entries can be prefixed with '-' to negate.]=]
 L["Swing"] = "Swing"
@@ -1516,7 +1516,7 @@ L["Warning: Full Scan auras checking for both name and spell id can't be convert
 L["Warning: Name info is now available via %affected, %unaffected. Number of affected group members via %unitCount. Some options behave differently now. This is not automatically adjusted."] = "Warning: Name info is now available via %affected, %unaffected. Number of affected group members via %unitCount. Some options behave differently now. This is not automatically adjusted."
 L["Warning: Tooltip values are now available via %tooltip1, %tooltip2, %tooltip3 instead of %s. This is not automatically adjusted."] = "Warning: Tooltip values are now available via %tooltip1, %tooltip2, %tooltip3 instead of %s. This is not automatically adjusted."
 L["WeakAuras Built-In (63:42 | 3:07 | 10 | 2.4)"] = "WeakAuras Built-In (63:42 | 3:07 | 10 | 2.4)"
-L["WeakAuras has detected empty settings. If this is unexpected, ask for assitance on https://discord.gg/weakauras."] = "WeakAuras has detected empty settings. If this is unexpected, ask for assitance on https://discord.gg/weakauras."
+L["WeakAuras has detected empty settings. If this is unexpected, ask for assitance on https://discord.gg/classlesswow."] = "WeakAuras has detected empty settings. If this is unexpected, ask for assitance on https://discord.gg/classlesswow."
 L[ [=[WeakAuras has detected that it has been downgraded.
 Your saved auras may no longer work properly.
 Would you like to run the |cffff0000EXPERIMENTAL|r repair tool? This will overwrite any changes you have made since the last database upgrade.

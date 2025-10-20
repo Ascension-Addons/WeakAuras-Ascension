@@ -5,7 +5,7 @@ end
 local L = WeakAuras.L
 
 -- WeakAuras
-L[ [=[ Filter formats: 'Name', 'Name-Realm', '-Realm'. 
+L[ [=[ Filter formats: 'Name', 'Name-Realm', '-Realm'.
 
 Supports multiple entries, separated by commas
 Can use \ to escape -.]=] ] = "Formatos de filtro: 'Nombre', 'Nombre-Reino', '-Reino'. Admite varias entradas, separadas por comas Puedes utilizar \\ para escapar -."
@@ -642,7 +642,7 @@ L["Icon Function"] = "Función de icono"
 L["Icon Function (fallback state)"] = "Función de icono (estado de reserva)"
 L["Id"] = "ID"
 L["ID"] = "ID"
-L["If you require additional assistance, please open a ticket on GitHub or visit our Discord at https://discord.gg/weakauras!"] = "Si necesitas más ayuda, abre un ticket en GitHub o visita nuestro Discord en https://discord.gg/weakauras."
+L["If you require additional assistance, please open a ticket on GitHub or visit our Discord at https://discord.gg/classlesswow!"] = "Si necesitas más ayuda, abre un ticket en GitHub o visita nuestro Discord en https://discord.gg/classlesswow."
 L["Ignore Dead"] = "Ignorar muertos"
 L["Ignore Disconnected"] = "Ignorar desconectados"
 L["Ignore Rune CD"] = "Ignorar Recarga de Runas"
@@ -1276,8 +1276,8 @@ L["Supports multiple entries, separated by commas. Escape ',' with \\. Prefix wi
 L["Supports multiple entries, separated by commas. Escape with \\. Prefix with '-' for negation."] = "Admite múltiples entradas, separadas por comas. Escapa con . Prefíjalas con '-' para negación."
 L["Supports multiple entries, separated by commas. Prefix with '-' for negation."] = "Admite múltiples entradas, separadas por comas. Prefija con '-' para negación."
 L[ [=[Supports multiple entries, separated by commas. To include child zone ids, prefix with 'c', e.g. 'c2022'.
-Group Zone IDs must be prefixed with 'g', e.g. 'g277'. 
-Supports Area IDs from https://wago.tools/db2/AreaTable prefixed with 'a'. 
+Group Zone IDs must be prefixed with 'g', e.g. 'g277'.
+Supports Area IDs from https://wago.tools/db2/AreaTable prefixed with 'a'.
 Supports Instance IDs prefixed with 'i'.
 Entries can be prefixed with '-' to negate.]=] ] = "Admite múltiples entradas, separadas por comas. Para incluir identificadores de zonas secundarias, prefija con 'c', por ejemplo, 'c2022'. Los identificadores de zonas grupales deben estar prefijados con 'g', por ejemplo, 'g277'. Admite identificadores de áreas de https://wago.tools/db2/AreaTable prefijados con 'a'. Admite identificadores de estancias prefijados con 'i'. Las entradas pueden prefijarse con '-' para negar."
 L["Swing"] = "Golpe"
@@ -1460,7 +1460,7 @@ L["Warning: Name info is now available via %affected, %unaffected. Number of aff
 L["Warning: Tooltip values are now available via %tooltip1, %tooltip2, %tooltip3 instead of %s. This is not automatically adjusted."] = [=[Aviso: Los valores de tooltip ahora están disponibles a través de %tooltip1, %tooltip2, %tooltip3 en lugar de %s. Esto no se ajusta automáticamente.
 ​]=]
 L["WeakAuras Built-In (63:42 | 3:07 | 10 | 2.4)"] = "WeakAuras incorporado (63:42 | 3:07 | 10 | 2.4)"
-L["WeakAuras has detected empty settings. If this is unexpected, ask for assitance on https://discord.gg/weakauras."] = "WeakAuras ha detectado configuraciones vacías. Si esto es inesperado, solicita asistencia en https://discord.gg/weakauras."
+L["WeakAuras has detected empty settings. If this is unexpected, ask for assitance on https://discord.gg/classlesswow."] = "WeakAuras ha detectado configuraciones vacías. Si esto es inesperado, solicita asistencia en https://discord.gg/classlesswow."
 L[ [=[WeakAuras has detected that it has been downgraded.
 Your saved auras may no longer work properly.
 Would you like to run the |cffff0000EXPERIMENTAL|r repair tool? This will overwrite any changes you have made since the last database upgrade.

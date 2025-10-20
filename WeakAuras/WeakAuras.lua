@@ -177,7 +177,8 @@ function Private.PrintHelp()
   print(L["/wa pstop - Finish profiling"])
   print(L["/wa pprint - Show the results from the most recent profiling"])
   print(L["/wa repair - Repair tool"])
-  print(L["If you require additional assistance, please open a ticket on GitHub or visit our Discord at https://discord.gg/UXSc7nt!"])
+  print(L["If you require additional assistance with the addon, please open an issue on the Ascension Addon GitHub or visit our Discord at https://discord.gg/classlesswow"])
+  print(L["If you require additional assistance with weakauras in general, please open a ticket on the WeakAuras GitHub or visit the Discord at https://discord.gg/classlesswow!"])
 end
 
 SLASH_WEAKAURAS1, SLASH_WEAKAURAS2 = "/weakauras", "/wa";
@@ -2493,7 +2494,7 @@ function Private.AddMany(tbl, takeSnapshots)
     else
       if next(WeakAuras.LoadFromArchive("Repository", "migration").stores) ~= nil then
         timer:ScheduleTimer(function()
-          prettyPrint(L["WeakAuras has detected empty settings. If this is unexpected, ask for assistance on https://discord.gg/UXSc7nt."])
+          prettyPrint(L["WeakAuras has detected empty settings. If this is unexpected, create a bug report, or ask for assistance on https://discord.gg/classlesswow."])
         end, 1)
       end
     end

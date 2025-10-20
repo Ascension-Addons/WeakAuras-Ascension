@@ -490,7 +490,7 @@ function OptionsPrivate.CreateFrame()
   local thanksListCJ = lineWrapDiscordList(OptionsPrivate.Private.DiscordListCJ)
   local thanksListK = lineWrapDiscordList(OptionsPrivate.Private.DiscordListK)
 
-  local discordButton = addFooter(L["Discord"], [[Interface\AddOns\WeakAuras\Media\Textures\discord.tga]], "https://discord.gg/UXSc7nt",
+  local discordButton = addFooter(L["Discord"], [[Interface\AddOns\WeakAuras\Media\Textures\discord.tga]], "https://discord.gg/classlesswow",
                                   L["Chat with WeakAuras experts on our Discord server."])
   discordButton:SetParent(tipFrame)
   discordButton:SetPoint("LEFT", tipFrame, "LEFT")
@@ -520,7 +520,7 @@ function OptionsPrivate.CreateFrame()
     changelogButton:SetPoint("LEFT", thanksButton, "RIGHT", footerSpacing, 0)
   end
 
-  local reportbugButton = addFooter(L["Found a Bug?"], [[Interface\AddOns\WeakAuras\Media\Textures\bug_report.tga]], "https://github.com/NoM0Re/WeakAuras-WotLK/issues",
+  local reportbugButton = addFooter(L["Found a Bug?"], [[Interface\AddOns\WeakAuras\Media\Textures\bug_report.tga]], "https://github.com/Ascension-Addons/WeakAuras-Ascension/issues",
                                     L["Report bugs on our issue tracker."], nil, nil, true)
   reportbugButton:SetParent(tipFrame)
   reportbugButton:SetPoint("RIGHT", tipFrame, "RIGHT")

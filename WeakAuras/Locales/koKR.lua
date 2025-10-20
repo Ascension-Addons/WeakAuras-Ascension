@@ -5,7 +5,7 @@ end
 local L = WeakAuras.L
 
 -- WeakAuras
-L[ [=[ Filter formats: 'Name', 'Name-Realm', '-Realm'. 
+L[ [=[ Filter formats: 'Name', 'Name-Realm', '-Realm'.
 
 Supports multiple entries, separated by commas
 Can use \ to escape -.]=] ] = [=[필터 형식: '이름', '이름-서버', '-서버'. 여러 항목을 지원하며, 각 항목은 쉼표로 구분합니다.
@@ -661,7 +661,7 @@ L["Icon Function"] = "아이콘 함수"
 L["Icon Function (fallback state)"] = "Icon 함수 (고장 대체 상태)"
 L["Id"] = "ID"
 L["ID"] = "ID"
-L["If you require additional assistance, please open a ticket on GitHub or visit our Discord at https://discord.gg/weakauras!"] = "더 많은 도움이 필요하다면 GitHub에서 티켓을 열거나 저희 Discord (https://discord.gg/weakauras)를 방문해 주세요!"
+L["If you require additional assistance, please open a ticket on GitHub or visit our Discord at https://discord.gg/classlesswow!"] = "더 많은 도움이 필요하다면 GitHub에서 티켓을 열거나 저희 Discord (https://discord.gg/classlesswow)를 방문해 주세요!"
 L["Ignore Dead"] = "죽음 무시"
 L["Ignore Disconnected"] = "오프라인 무시"
 L["Ignore Rune CD"] = "룬 쿨타임 무시"
@@ -1330,8 +1330,8 @@ L["Supports multiple entries, separated by commas. Escape ',' with \\. Prefix wi
 L["Supports multiple entries, separated by commas. Escape with \\. Prefix with '-' for negation."] = "여러 항목을 지원하며 쉼표로 구분됩니다. 앞에 \\를 넣으면 이스케이프 처리가 됩니다. 앞에 '-'를 붙이면 조건을 반대로 적용합니다."
 L["Supports multiple entries, separated by commas. Prefix with '-' for negation."] = "여러 항목을 지원하며 쉼표로 구분됩니다. 조건을 반대로 하려면 앞에 '-'를 붙이세요."
 L[ [=[Supports multiple entries, separated by commas. To include child zone ids, prefix with 'c', e.g. 'c2022'.
-Group Zone IDs must be prefixed with 'g', e.g. 'g277'. 
-Supports Area IDs from https://wago.tools/db2/AreaTable prefixed with 'a'. 
+Group Zone IDs must be prefixed with 'g', e.g. 'g277'.
+Supports Area IDs from https://wago.tools/db2/AreaTable prefixed with 'a'.
 Supports Instance IDs prefixed with 'i'.
 Entries can be prefixed with '-' to negate.]=] ] = "여러 항목을 지원하며 쉼표로 구분됩니다. 자식 지역(Child Zone) ID를 포함하려면 'c2022'처럼 'c'를 접두사로 사용하세요. 그룹 지역(Group Zone) ID는 'g277'처럼 'g'를 접두사로 사용해야 합니다. 구역(Area) ID는 https://wago.tools/db2/AreaTable에서 확인할 수 있으며 'a'를 접두사로 사용합니다. 인스턴스(Instance) ID는 'i'를 접두사로 사용하세요. 이들 항목은 '-'를 접두사로 사용하면 조건이 반대로 해당 지역에 없을 때가 됩니다."
 L["Swing"] = "근접 평타"
@@ -1511,7 +1511,7 @@ L["Warning: Full Scan auras checking for both name and spell id can't be convert
 L["Warning: Name info is now available via %affected, %unaffected. Number of affected group members via %unitCount. Some options behave differently now. This is not automatically adjusted."] = "경고: 이제부터 %affected, %unaffected를 통해 이름 정보를 사용할 수 있습니다. 오라에 걸린 그룹원 수는 %unitCount를 사용합니다. 일부 옵션이 지금부터 다르게 작용합니다. 이것은 자동으로 조정되지 않습니다."
 L["Warning: Tooltip values are now available via %tooltip1, %tooltip2, %tooltip3 instead of %s. This is not automatically adjusted."] = "경고: 툴팁 값은 이제 %s 대신 %tooltip1, %tooltip2, %tooltip3으로 사용할 수 있습니다. 이것은 자동으로 조정되지 않습니다."
 L["WeakAuras Built-In (63:42 | 3:07 | 10 | 2.4)"] = "WeakAuras 내장 (63:42 | 3:07 | 10 | 2.4)"
-L["WeakAuras has detected empty settings. If this is unexpected, ask for assitance on https://discord.gg/weakauras."] = "WeakAuras가 빈 설정을 감지했습니다. 갑자기 발생한 것이라면 https://discord.gg/weakauras에서 도움을 요청하세요."
+L["WeakAuras has detected empty settings. If this is unexpected, ask for assitance on https://discord.gg/classlesswow."] = "WeakAuras가 빈 설정을 감지했습니다. 갑자기 발생한 것이라면 https://discord.gg/classlesswow에서 도움을 요청하세요."
 L[ [=[WeakAuras has detected that it has been downgraded.
 Your saved auras may no longer work properly.
 Would you like to run the |cffff0000EXPERIMENTAL|r repair tool? This will overwrite any changes you have made since the last database upgrade.

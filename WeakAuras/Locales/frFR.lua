@@ -5,7 +5,7 @@ end
 local L = WeakAuras.L
 
 -- WeakAuras
-L[ [=[ Filter formats: 'Name', 'Name-Realm', '-Realm'. 
+L[ [=[ Filter formats: 'Name', 'Name-Realm', '-Realm'.
 
 Supports multiple entries, separated by commas
 Can use \ to escape -.]=] ] = "Filtres supportés : 'Pseudo', 'Pseudo-Serveur', '-Serveur'. Supporte les entrées multiples, séparées par des virgules; utiliser \\ pour \"échapper\" à -."
@@ -207,7 +207,7 @@ L["Bar Type"] = "Bar Type"
 L["Baron Geddon"] = "Baron Geddon"
 L["Battle for Azeroth"] = "Battle for Azeroth"
 L["Battle.net Whisper"] = "Message Battle.net"
-L["Battleground"] = [=[Champ De Bataille 
+L["Battleground"] = [=[Champ De Bataille
 ]=]
 L["Battleguard Sartura"] = "Garde de guerre Sartura"
 --[[Translation missing --]]
@@ -890,7 +890,7 @@ L["Id"] = "Id"
 --[[Translation missing --]]
 L["ID"] = "ID"
 --[[Translation missing --]]
-L["If you require additional assistance, please open a ticket on GitHub or visit our Discord at https://discord.gg/weakauras!"] = "If you require additional assistance, please open a ticket on GitHub or visit our Discord at https://discord.gg/weakauras!"
+L["If you require additional assistance, please open a ticket on GitHub or visit our Discord at https://discord.gg/classlesswow!"] = "If you require additional assistance, please open a ticket on GitHub or visit our Discord at https://discord.gg/classlesswow!"
 L["Ignore Dead"] = "Ignorer la mort"
 L["Ignore Disconnected"] = "Ignorer les déconnectés"
 L["Ignore Rune CD"] = "Ignorer le rechargement des runes"
@@ -1813,12 +1813,12 @@ L["Supports multiple entries, separated by commas. Escape with \\. Prefix with '
 L["Supports multiple entries, separated by commas. Prefix with '-' for negation."] = "Supports multiple entries, separated by commas. Prefix with '-' for negation."
 --[[Translation missing --]]
 L[ [=[Supports multiple entries, separated by commas. To include child zone ids, prefix with 'c', e.g. 'c2022'.
-Group Zone IDs must be prefixed with 'g', e.g. 'g277'. 
-Supports Area IDs from https://wago.tools/db2/AreaTable prefixed with 'a'. 
+Group Zone IDs must be prefixed with 'g', e.g. 'g277'.
+Supports Area IDs from https://wago.tools/db2/AreaTable prefixed with 'a'.
 Supports Instance IDs prefixed with 'i'.
 Entries can be prefixed with '-' to negate.]=] ] = [=[Supports multiple entries, separated by commas. To include child zone ids, prefix with 'c', e.g. 'c2022'.
-Group Zone IDs must be prefixed with 'g', e.g. 'g277'. 
-Supports Area IDs from https://wago.tools/db2/AreaTable prefixed with 'a'. 
+Group Zone IDs must be prefixed with 'g', e.g. 'g277'.
+Supports Area IDs from https://wago.tools/db2/AreaTable prefixed with 'a'.
 Supports Instance IDs prefixed with 'i'.
 Entries can be prefixed with '-' to negate.]=]
 L["Swing"] = "Coup"
@@ -2091,7 +2091,7 @@ L["Warning: Tooltip values are now available via %tooltip1, %tooltip2, %tooltip3
 --[[Translation missing --]]
 L["WeakAuras Built-In (63:42 | 3:07 | 10 | 2.4)"] = "WeakAuras Built-In (63:42 | 3:07 | 10 | 2.4)"
 --[[Translation missing --]]
-L["WeakAuras has detected empty settings. If this is unexpected, ask for assitance on https://discord.gg/weakauras."] = "WeakAuras has detected empty settings. If this is unexpected, ask for assitance on https://discord.gg/weakauras."
+L["WeakAuras has detected empty settings. If this is unexpected, ask for assitance on https://discord.gg/classlesswow."] = "WeakAuras has detected empty settings. If this is unexpected, ask for assitance on https://discord.gg/classlesswow."
 --[[Translation missing --]]
 L[ [=[WeakAuras has detected that it has been downgraded.
 Your saved auras may no longer work properly.

@@ -410,7 +410,7 @@ function WeakAuras.PrintProfile()
 
   popup:AddText("")
   popup:AddText("Note: Not every aspect of each aura can be tracked.")
-  popup:AddText("You can ask on our discord https://discord.gg/weakauras for help interpreting this output.")
+  popup:AddText("You can ask on our discord https://discord.gg/classlesswow for help interpreting this output.")
 
   popup:AddText("")
   popup:AddText("|cff9900ffAuras:|r")

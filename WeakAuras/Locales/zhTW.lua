@@ -5,7 +5,7 @@ end
 local L = WeakAuras.L
 
 -- WeakAuras
-L[ [=[ Filter formats: 'Name', 'Name-Realm', '-Realm'. 
+L[ [=[ Filter formats: 'Name', 'Name-Realm', '-Realm'.
 
 Supports multiple entries, separated by commas
 Can use \ to escape -.]=] ] = [=[過濾格式: '名字'、'名字-伺服器'、'-伺服器'。
@@ -648,7 +648,7 @@ L["Icon Function"] = "圖示功能"
 L["Icon Function (fallback state)"] = "圖示函數 (備用狀態)"
 L["Id"] = "Id"
 L["ID"] = "ID"
-L["If you require additional assistance, please open a ticket on GitHub or visit our Discord at https://discord.gg/weakauras!"] = "如果你需要其他協助，請在 GitHub 新增問題，或拜訪我們的 Discord https://discord.gg/weakauras!"
+L["If you require additional assistance, please open a ticket on GitHub or visit our Discord at https://discord.gg/classlesswow!"] = "如果你需要其他協助，請在 GitHub 新增問題，或拜訪我們的 Discord https://discord.gg/classlesswow!"
 L["Ignore Dead"] = "忽略死者"
 L["Ignore Disconnected"] = "忽略離線者"
 L["Ignore Rune CD"] = "忽略符文冷卻"
@@ -1307,8 +1307,8 @@ L["Supports multiple entries, separated by commas. Escape ',' with \\. Prefix wi
 L["Supports multiple entries, separated by commas. Escape with \\. Prefix with '-' for negation."] = "支援輸入多個項目，使用逗號分隔。用 \\ 跳脫。前面加上 '-' 表示否定。"
 L["Supports multiple entries, separated by commas. Prefix with '-' for negation."] = "支援輸入多個項目，使用逗號分隔。前面加上 '-' 表示否定。"
 L[ [=[Supports multiple entries, separated by commas. To include child zone ids, prefix with 'c', e.g. 'c2022'.
-Group Zone IDs must be prefixed with 'g', e.g. 'g277'. 
-Supports Area IDs from https://wago.tools/db2/AreaTable prefixed with 'a'. 
+Group Zone IDs must be prefixed with 'g', e.g. 'g277'.
+Supports Area IDs from https://wago.tools/db2/AreaTable prefixed with 'a'.
 Supports Instance IDs prefixed with 'i'.
 Entries can be prefixed with '-' to negate.]=] ] = [=[支援輸入多個項目，以逗號分隔。若要包含子區域 ID，請在前面加上 'c'，例如「c2022」。
 群組區域 ID 必須以 'g' 開頭，例如 'g277'。
@@ -1492,7 +1492,7 @@ L["Warning: Full Scan auras checking for both name and spell id can't be convert
 L["Warning: Name info is now available via %affected, %unaffected. Number of affected group members via %unitCount. Some options behave differently now. This is not automatically adjusted."] = "警告: 現在改為使用 %affected, %unaffected 來取得名字資訊，使用 %unitCount 取得受影響的隊友數量。一些選項的行為已經和以往不同了，並且不會自動調整。"
 L["Warning: Tooltip values are now available via %tooltip1, %tooltip2, %tooltip3 instead of %s. This is not automatically adjusted."] = "警告: 現在改為使用 %tooltip1, %tooltip2, %tooltip3 來取得浮動提示資訊中的值，而不是 %s。這不會自動調整。"
 L["WeakAuras Built-In (63:42 | 3:07 | 10 | 2.4)"] = "WeakAuras 內建的 (63:42 | 3:07 | 10 | 2.4)"
-L["WeakAuras has detected empty settings. If this is unexpected, ask for assitance on https://discord.gg/weakauras."] = "WeakAuras 偵測到空設定。如果發生意外情況，請在 https://discord.gg/weakauras 上尋求協助。"
+L["WeakAuras has detected empty settings. If this is unexpected, ask for assitance on https://discord.gg/classlesswow."] = "WeakAuras 偵測到空設定。如果發生意外情況，請在 https://discord.gg/classlesswow 上尋求協助。"
 L[ [=[WeakAuras has detected that it has been downgraded.
 Your saved auras may no longer work properly.
 Would you like to run the |cffff0000EXPERIMENTAL|r repair tool? This will overwrite any changes you have made since the last database upgrade.
@@ -1500,7 +1500,7 @@ Last upgrade: %s
 
 |cffff0000You should BACKUP your WTF folder BEFORE pressing this button.|r]=] ] = [=[WeakAuras 偵測到它被降回舊版本，你所儲存的提醒效果已無法正常運作。
 是否要執行|cffff0000實驗性的|r修復工具? 將會覆蓋自上次資料庫升級以來所做的任何更改。
-上次升級是: %s 
+上次升級是: %s
 
 |cffff0000在按下此按鈕之前，你應該先備份 WTF 資料夾。|r]=]
 L["WeakAuras is creating a rollback snapshot of your auras. This snapshot will allow you to revert to the current state of your auras if something goes wrong. This process may cause your framerate to drop until it is complete."] = "WeakAuras 正在建立提醒效果的還原快照。如果出現問題，此快照將允許您恢復到提醒效果目前的狀態。此過程可能會導致幀速下降，直到完成為止。"
