@@ -3,6 +3,7 @@
 ## Author: Infus
 ## Notes: Textures for Stop Motion
 ## X-Category: Interface Enhancements
+## X-IconTexture: Interface\AddOns\WeakAuras\Media\WeakAurasLogo
 ## DefaultState: Enabled
 ## Dependencies: WeakAuras, WeakAurasOptions
 

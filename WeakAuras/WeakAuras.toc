@@ -16,6 +16,7 @@
 ## X-Curse-Project-ID: 65387
 ## X-WoWI-ID: 24910
 ## X-Wago-ID: VBNBxKx5
+## X-IconTexture: Interface\AddOns\WeakAuras\Media\WeakAurasLogo
 ## DefaultState: Enabled
 ## LoadOnDemand: 0
 ## SavedVariables: WeakAurasSaved

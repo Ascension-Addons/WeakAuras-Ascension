@@ -11,6 +11,7 @@
 ## Notes-zhTW: WeakAuras的設定
 ## X-Category: Interface Enhancements
 ## Globe-Main: WeakAuras
+## X-IconTexture: Interface\AddOns\WeakAuras\Media\WeakAurasLogo
 ## DefaultState: Enabled
 ## LoadOnDemand: 1
 ## Dependencies: WeakAuras

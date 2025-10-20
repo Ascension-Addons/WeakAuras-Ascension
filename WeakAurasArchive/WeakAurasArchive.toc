@@ -1,5 +1,6 @@
 ## Interface: 30300
 ## Title: WeakAuras Archive
+## X-IconTexture: Interface\AddOns\WeakAuras\Media\WeakAurasLogo
 ## LoadOnDemand: 1
 ## SavedVariables: WeakAurasArchive
 ## Dependencies: WeakAuras
