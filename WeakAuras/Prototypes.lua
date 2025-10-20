@@ -1115,7 +1115,7 @@ Private.load_prototype = {
       display = WeakAuras.newFeatureString .. L["|cFFFF0000Not|r Spell Known"],
       type = "spell",
       test = "not WeakAuras.IsSpellKnownForLoad(%s, %s)",
-      events = {"SPELLS_CHANGED", "UNIT_PET", "CHARACTER_ADVANCEMENT_PENDING_BUILD_UPDATED"},
+      events = {"SPELLS_CHANGED", "UNIT_PET", "ASCENSION_KNOWN_ENTRIES_UPDATED"},
       showExactOption = true
     },
     {

@@ -1721,6 +1721,10 @@ loadFrame:RegisterEvent("PLAYER_REGEN_ENABLED");
 loadFrame:RegisterEvent("PLAYER_ROLES_ASSIGNED");
 loadFrame:RegisterEvent("SPELLS_CHANGED");
 loadFrame:RegisterEvent("ASCENSION_KNOWN_ENTRIES_UPDATED");
+loadFrame:RegisterEvent("MYSTIC_ENCHANT_PRESET_SET_ACTIVE_RESULT");
+loadFrame:RegisterEvent("MYSTIC_ENCHANT_SLOT_UPDATE");
+loadFrame:RegisterEvent("ASCENSION_CA_SPECIALIZATION_ACTIVE_ID_CHANGED");
+loadFrame:RegisterEvent("ACTIVE_MANASTORM_UPDATED");
 loadFrame:RegisterEvent("UNIT_INVENTORY_CHANGED")
 loadFrame:RegisterEvent("PLAYER_EQUIPMENT_CHANGED")
 loadFrame:RegisterEvent("PLAYER_DEAD")
