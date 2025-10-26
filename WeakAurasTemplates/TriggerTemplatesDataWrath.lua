@@ -990,6 +990,52 @@ local function createSimplePowerTemplate(powertype)
 end
 
 -------------------------------
+-- Build HERO meta-class by aggregating all class templates
+-------------------------------
+
+-- Create HERO class sections
+templates.class.HERO = {
+  [1] = {
+    [1] = { title = L["Buffs"], args = {}, icon = [[Interface/Icons/INV_Misc_QuestionMark]] },
+    [2] = { title = L["Debuffs"], args = {}, icon = [[Interface/Icons/INV_Misc_QuestionMark]] },
+    [3] = { title = L["Abilities"], args = {}, icon = [[Interface/Icons/INV_Misc_QuestionMark]] },
+    [8] = { title = L["Resources"], args = {}, icon = manaIcon },
+  }
+}
+
+-- Simple shallow copy to avoid mutating original class items when adding load conditions later
+local function __wa_copy_item_shallow(src)
+  if type(src) ~= "table" then return src end
+  local dst = {}
+  for k, v in pairs(src) do
+    dst[k] = v
+  end
+  return dst
+end
+
+-- Aggregate Buffs(1), Debuffs(2), Abilities(3) from all existing classes into HERO
+for className, classData in pairs(templates.class) do
+  if className ~= "HERO" then
+    local spec = classData[1]
+    if spec then
+      for sectionIndex = 1, 3 do
+        local section = spec[sectionIndex]
+        if section and section.args then
+          for _, item in ipairs(section.args) do
+            -- Copy to HERO without mutating original
+            table.insert(templates.class.HERO[1][sectionIndex].args, __wa_copy_item_shallow(item))
+            -- After adding to HERO, offset the original class spell id by 1,100,000 when applicable
+            if type(item.spell) == "number" then
+              item.spell = item.spell + 1100000
+            end
+          end
+        end
+      end
+    end
+  end
+end
+
+-------------------------------
 -- Hardcoded trigger templates
 -------------------------------
 
@@ -1002,9 +1048,37 @@ tinsert(templates.class.WARRIOR[1][8].args, {
     event = "Stance/Form/Aura"}}}
 })
 for j, id in ipairs({2457, 71, 2458}) do
-  local title, _, icon = GetSpellInfo(id)
+  local title, _, icon = GetSpellInfo(id + 1100000)
   if title then
     tinsert(templates.class.WARRIOR[1][8].args, {
+      title = title,
+      icon = icon,
+      triggers = {
+        [1] = {
+          trigger = {
+            type = WeakAuras.GetTriggerCategoryFor("Stance/Form/Aura"),
+            event = "Stance/Form/Aura",
+            use_form = true,
+            form = { single = j }
+          }
+        }
+      }
+    });
+  end
+end
+
+-- HERO: Include Warrior Stances in Resources
+tinsert(templates.class.HERO[1][8].args, {
+  title = L["Stance"],
+  icon = [[Interface/Icons/Ability_Warrior_OffensiveStance]],
+  triggers = {[1] = { trigger = {
+    type = WeakAuras.GetTriggerCategoryFor("Stance/Form/Aura"),
+    event = "Stance/Form/Aura"}}}
+})
+for j, id in ipairs({2457, 71, 2458}) do
+  local title, _, icon = GetSpellInfo(id)
+  if title then
+    tinsert(templates.class.HERO[1][8].args, {
       title = title,
       icon = icon,
       triggers = {
@@ -1034,6 +1108,11 @@ tinsert(templates.class.DRUID[1][8].args, createSimplePowerTemplate(0));
 tinsert(templates.class.DRUID[1][8].args, createSimplePowerTemplate(1));
 tinsert(templates.class.DRUID[1][8].args, createSimplePowerTemplate(3));
 tinsert(templates.class.DRUID[1][8].args, createSimplePowerTemplate(4));
+-- HERO: include common resource trackers
+tinsert(templates.class.HERO[1][8].args, createSimplePowerTemplate(0));
+tinsert(templates.class.HERO[1][8].args, createSimplePowerTemplate(1));
+tinsert(templates.class.HERO[1][8].args, createSimplePowerTemplate(3));
+tinsert(templates.class.HERO[1][8].args, createSimplePowerTemplate(4));
 
 -- Shapeshift Form
 tinsert(templates.class.DRUID[1][8].args, {
@@ -1044,7 +1123,7 @@ tinsert(templates.class.DRUID[1][8].args, {
     event = "Stance/Form/Aura"}}}
 });
 for j, id in ipairs({5487, 1066, 768, 783, 33891, 24858}) do
-  local title, _, icon = GetSpellInfo(id)
+  local title, _, icon = GetSpellInfo(id + 1100000)
   if title then
     tinsert(templates.class.DRUID[1][8].args, {
       title = title,
@@ -1063,6 +1142,34 @@ for j, id in ipairs({5487, 1066, 768, 783, 33891, 24858}) do
   end
 end
 
+
+-- HERO: Shapeshift Forms
+tinsert(templates.class.HERO[1][8].args, {
+  title = L["Shapeshift Form"],
+  icon = [[Interface/Icons/Ability_Racial_BearForm]],
+  triggers = {[1] = { trigger = {
+    type = WeakAuras.GetTriggerCategoryFor("Stance/Form/Aura"),
+    event = "Stance/Form/Aura"}}}
+});
+for j, id in ipairs({5487, 1066, 768, 783, 33891, 24858}) do
+  local title, _, icon = GetSpellInfo(id)
+  if title then
+    tinsert(templates.class.HERO[1][8].args, {
+      title = title,
+      icon = icon,
+      triggers = {
+        [1] = {
+          trigger = {
+            type = WeakAuras.GetTriggerCategoryFor("Stance/Form/Aura"),
+            event = "Stance/Form/Aura",
+            use_form = true,
+            form = { single = j == 6 and 5 or j } -- 6 is Moonkin, which is form 5
+          }
+        }
+      }
+    });
+  end
+end
 
 ------------------------------
 -- Hardcoded race templates
@@ -1100,6 +1207,14 @@ tinsert(templates.race.BloodElf, { spell = 28730, type = "ability", debuff = tru
 tinsert(templates.race.Draenei, { spell = 28880, type = "ability", buff = true, titleSuffix = L["cooldown"]});
 tinsert(templates.race.Draenei, { spell = 28880, type = "buff", unit = "player", titleSuffix = L["buff"]});
 
+-- Default classes use new racial ids
+if not C_Player:IsHero() then
+  for _, raceData in pairs(templates.race) do
+    for _, spellInfo in pairs(raceData) do
+      spellInfo.spell = spellInfo.spell + 1100000
+    end
+  end
+end
 ------------------------------
 -- Helper code for options
 -------------------------------
